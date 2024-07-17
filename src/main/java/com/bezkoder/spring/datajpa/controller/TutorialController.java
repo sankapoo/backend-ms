@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bezkoder.spring.datajpa.model.Tutorial;
 import com.bezkoder.spring.datajpa.repository.TutorialRepository;
 
-@CrossOrigin(origins = "http://localhost:8081")
+// @CrossOrigin(origins = "http://localhost:8081")
+
+@CrossOrigin(origins = "https://frontend-ms-git-microservices-project.apps.cluster-rks25.sandbox1930.opentlc.com/")
 @RestController
 @RequestMapping("/api")
 public class TutorialController {
