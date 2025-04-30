@@ -18,3 +18,11 @@ spec:
     - ref: backend-ms
   template:
     ref: backend-ms
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-secret
+type: Opaque
+stringData:
+  secretToken: "1234567"
