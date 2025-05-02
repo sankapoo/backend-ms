@@ -1,0 +1,25 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: Trigger
+metadata:
+  name: backend-ms-trigger-qa
+spec:
+  serviceAccountName: pipeline
+  interceptors:
+    - ref:
+        name: "github"
+      params:
+        - name: "secretRef"
+          value:
+            secretName: github-secret
+            secretKey: secretToken
+        - name: "eventTypes"
+          value: ["create"]
+    - ref:
+        name: "cel"
+      params:
+        - name: "filter"
+          value: "body.ref_type == 'tag' && body.ref.startsWith('release')"
+  bindings:
+    - ref: backend-ms
+  template:
+    ref: backend-ms-qa
