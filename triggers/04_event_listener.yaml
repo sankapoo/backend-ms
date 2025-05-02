@@ -5,4 +5,5 @@ metadata:
 spec:
   serviceAccountName: pipeline
   triggers:
-    - triggerRef: backend-ms-trigger
+    - triggerRef: backend-ms-trigger     # existing trigger for dev
+    - triggerRef: backend-ms-trigger-qa  # new trigger for qa (tags only)
