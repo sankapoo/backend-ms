@@ -1,22 +1,22 @@
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
-  name: backend-ms
+  name: backend-ms-staging
 spec:
   params:
   - name: git-repo-url
     description: The git repository url
   - name: git-revision
     description: The git revision
-    default: main
   - name: git-repo-name
-    description: The name of the deployment to be created / patched
+    description: The name of deployment
 
   resourcetemplates:
   - apiVersion: tekton.dev/v1
     kind: PipelineRun
     metadata:
-      generateName: build-deploy-$(tt.params.git-repo-name)-
+      generateName: build-deploy-qa-$(tt.params.git-repo-name)-
+      namespace: tekton-demo-staging    # ← ensure deployment happens in QA namespace
     spec:
       taskRunTemplate:
         serviceAccountName: pipeline
@@ -30,7 +30,7 @@ spec:
       - name: git-revision
         value: $(tt.params.git-revision)
       - name: IMAGE
-        value: image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(tt.params.git-repo-name)
+        value: image-registry.openshift-image-registry.svc:5000/tekton-demo-staging/$(tt.params.git-repo-name)
       workspaces:
       - name: shared-workspace
         volumeClaimTemplate:

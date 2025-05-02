@@ -1,7 +1,7 @@
 apiVersion: triggers.tekton.dev/v1beta1
 kind: Trigger
 metadata:
-  name: backend-ms-trigger
+  name: backend-ms-trigger-staging
 spec:
   serviceAccountName: pipeline
   interceptors:
@@ -13,8 +13,13 @@ spec:
             secretName: github-secret
             secretKey: secretToken
         - name: "eventTypes"
-          value: ["push"]
+          value: ["create"]
+    - ref:
+        name: "cel"
+      params:
+        - name: "filter"
+          value: "body.ref_type == 'tag' && body.ref.startsWith('release')"
   bindings:
     - ref: backend-ms
   template:
-    ref: backend-ms
+    ref: backend-ms-staging
