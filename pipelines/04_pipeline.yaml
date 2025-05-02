@@ -70,6 +70,11 @@ spec:
     workspaces:
     - name: source
       workspace: shared-workspace
+    params:
+      - name: manifest_dir
+        value: "k8s"
+      - name: NAMESPACE
+        value: $(params.NAMESPACE)
     runAfter:
     - build-image
   - name: update-deployment
