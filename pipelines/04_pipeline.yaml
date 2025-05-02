@@ -19,6 +19,8 @@ spec:
   - name: IMAGE
     type: string
     description: image to be build from the code
+  - name: NAMESPACE
+    type: string
   tasks:
   - name: fetch-repository
     taskRef:
@@ -78,5 +80,7 @@ spec:
       value: $(params.deployment-name)
     - name: IMAGE
       value: $(params.IMAGE)
+    - name: NAMESPACE
+      value: $(context.pipelineRun.namespace)
     runAfter:
     - apply-manifests

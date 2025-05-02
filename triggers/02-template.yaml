@@ -11,6 +11,8 @@ spec:
     default: main
   - name: git-repo-name
     description: The name of the deployment to be created / patched
+  - name: NAMESPACE
+    description: The namespace for deployment
 
   resourcetemplates:
   - apiVersion: tekton.dev/v1
@@ -29,8 +31,11 @@ spec:
         value: $(tt.params.git-repo-url)
       - name: git-revision
         value: $(tt.params.git-revision)
+      - name: NAMESPACE
+        value: $(tt.params.NAMESPACE)
       - name: IMAGE
         value: image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(tt.params.git-repo-name)
+
       workspaces:
       - name: shared-workspace
         volumeClaimTemplate:

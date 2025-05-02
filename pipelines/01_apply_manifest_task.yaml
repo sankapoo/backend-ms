@@ -18,5 +18,5 @@ spec:
       args:
         - |-
           echo Applying manifests in $(inputs.params.manifest_dir) directory
-          oc apply -f $(inputs.params.manifest_dir)
+          oc apply -f $(inputs.params.manifest_dir) -n $(context.pipelineRun.namespace)
           echo -----------------------------------
