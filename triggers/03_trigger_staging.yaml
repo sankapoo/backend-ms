@@ -23,3 +23,6 @@ spec:
     - ref: backend-ms
   template:
     ref: backend-ms-staging
+    params:
+      - name: NAMESPACE
+        value: tekton-demo-staging
