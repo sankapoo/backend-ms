@@ -16,9 +16,9 @@ spec:
           value: ["push"]
     - ref:
         name: cel
-        params:
-          - name: filter
-            value: "body.ref.startsWith('refs/heads/')"
+      params:
+        - name: filter
+          value: "body.ref.startsWith('refs/heads/')"
   bindings:
     - ref: backend-ms-trigger-binding-dev
   template:
@@ -31,4 +31,3 @@ metadata:
 type: Opaque
 stringData:
   secretToken: "1234567"
-
