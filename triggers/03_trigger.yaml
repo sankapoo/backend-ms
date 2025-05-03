@@ -18,3 +18,12 @@ spec:
     - ref: backend-ms-trigger-binding-dev
   template:
     ref: backend-ms-trigger-template-dev
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-secret
+type: Opaque
+stringData:
+  secretToken: "1234567"
+

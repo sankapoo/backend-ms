@@ -10,3 +10,5 @@ spec:
     value: $(body.repository.name)
   - name: git-revision
     value: $(body.ref)
+  - name: NAMESPACE
+    value: tekton-demo-dev   # ✅ hardcoded value here
