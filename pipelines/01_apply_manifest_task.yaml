@@ -21,5 +21,6 @@ spec:
       args:
         - |-
           echo Applying manifests in $(inputs.params.manifest_dir) directory
-          oc apply -f $(inputs.params.manifest_dir) -n $(inputs.params.NAMESPACE)
+          namespace="$(inputs.params.NAMESPACE)"
+          oc apply -f $(inputs.params.manifest_dir) -n "$namespace"
           echo -----------------------------------
