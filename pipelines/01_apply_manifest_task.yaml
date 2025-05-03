@@ -20,8 +20,8 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - |-
-          echo Applying manifests in $(inputs.params.manifest_dir) directory
-          oc project
-          namespace="$(inputs.params.NAMESPACE)"
-          oc apply -f $(inputs.params.manifest_dir) -n "$namespace"
+          echo Applying manifests in $(params.manifest_dir) directory
+          namespace="$(params.NAMESPACE)"
+          echo Using namespace: $namespace
+          oc apply -f $(params.manifest_dir) -n "$namespace"
           echo -----------------------------------
