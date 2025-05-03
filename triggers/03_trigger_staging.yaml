@@ -20,9 +20,6 @@ spec:
         - name: "filter"
           value: "body.ref_type == 'tag' && body.ref.startsWith('release')"
   bindings:
-    - ref: backend-ms
+    - ref: backend-ms-trigger-binding-staging
   template:
-    ref: backend-ms-staging
-    params:
-      - name: NAMESPACE
-        value: tekton-demo-staging
+    ref: backend-ms-trigger-template-staging

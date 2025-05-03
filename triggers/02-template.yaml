@@ -1,7 +1,7 @@
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
-  name: backend-ms
+  name: backend-ms-trigger-template-dev
 spec:
   params:
   - name: git-repo-url

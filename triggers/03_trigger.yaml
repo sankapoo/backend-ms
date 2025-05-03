@@ -1,7 +1,7 @@
 apiVersion: triggers.tekton.dev/v1beta1
 kind: Trigger
 metadata:
-  name: backend-ms-trigger
+  name: backend-ms-trigger-dev
 spec:
   serviceAccountName: pipeline
   interceptors:
@@ -15,6 +15,6 @@ spec:
         - name: "eventTypes"
           value: ["push"]
   bindings:
-    - ref: backend-ms
+    - ref: backend-ms-trigger-binding-dev
   template:
-    ref: backend-ms
+    ref: backend-ms-trigger-template-dev

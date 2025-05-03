@@ -1,9 +1,9 @@
 apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
 metadata:
-  name: backend-ms
+  name: backend-ms-eventlistener
 spec:
   serviceAccountName: pipeline
   triggers:
-    - triggerRef: backend-ms-trigger          # existing trigger for dev
+    - triggerRef: backend-ms-trigger-dev          # existing trigger for dev
     - triggerRef: backend-ms-trigger-staging  # new trigger for staging (tags only)

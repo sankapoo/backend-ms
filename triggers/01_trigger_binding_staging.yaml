@@ -1,7 +1,7 @@
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerBinding
 metadata:
-  name: backend-ms
+  name: backend-ms-trigger-binding-staging
 spec:
   params:
   - name: git-repo-url
@@ -10,3 +10,5 @@ spec:
     value: $(body.repository.name)
   - name: git-revision
     value: $(body.ref)
+  - name: NAMESPACE
+    value: tekton-demo-staging   # ✅ hardcoded value here
