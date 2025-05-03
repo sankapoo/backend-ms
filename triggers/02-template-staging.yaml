@@ -18,7 +18,7 @@ spec:
     kind: PipelineRun
     metadata:
       generateName: build-deploy-qa-$(tt.params.git-repo-name)-
-      namespace: tekton-demo-staging    # ← ensure deployment happens in QA namespace
+      namespace: tekton-demo-dev
     spec:
       taskRunTemplate:
         serviceAccountName: pipeline
@@ -34,7 +34,7 @@ spec:
       - name: NAMESPACE
         value: $(tt.params.NAMESPACE)
       - name: IMAGE
-        value: image-registry.openshift-image-registry.svc:5000/tekton-demo-staging/$(tt.params.git-repo-name)
+        value: image-registry.openshift-image-registry.svc:5000/$(tt.params.NAMESPACE)/$(tt.params.git-repo-name)
       workspaces:
       - name: shared-workspace
         volumeClaimTemplate:
