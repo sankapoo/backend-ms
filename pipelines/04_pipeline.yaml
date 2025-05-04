@@ -64,6 +64,25 @@ spec:
       workspace: shared-workspace
     runAfter:
     - fetch-repository
+  - name: approval
+    taskRef:
+      apiVersion: tekton.automatiko.io/v1beta1
+      kind: ApprovalTask
+      name: approvaltask
+    params:
+    - name: pipeline
+      value: "$(context.pipelineRun.name)"
+    - name: description
+      value: "Approve deployment to staging"
+    - name: approvers
+      value:
+      - "admin"  # adjust based on your auth system
+    when:
+    - input: "$(params.NAMESPACE)"
+      operator: in
+      values: [ "tekton-demo-staging" ]
+    runAfter:
+      - build-image
   - name: apply-manifests
     taskRef:
       name: apply-manifests
@@ -77,6 +96,7 @@ spec:
         value: $(params.NAMESPACE)
     runAfter:
     - build-image
+    - approval  # This is safe even if approval is skipped
   - name: update-deployment
     taskRef:
       name: update-deployment
