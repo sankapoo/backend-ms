@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: automatiko-approval
+  labels:
+    app: automatiko-approval
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: automatiko-approval
+  template:
+    metadata:
+      labels:
+        app: automatiko-approval
+    spec:
+      containers:
+        - name: approval
+          image: automatiko/automatiko-approval-task:0.11.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: AUTOMATIKO_USER
+              value: admin
+            - name: AUTOMATIKO_PASSWORD
+              value: admin
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: automatiko-approval
+spec:
+  selector:
+    app: automatiko-approval
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: automatiko-approval
+spec:
+  to:
+    kind: Service
+    name: automatiko-approval
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+
